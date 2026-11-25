@@ -17,7 +17,7 @@ Es siempre el mismo comando: para una Mac nueva, para una que ya tiene los proye
 1. Instala Homebrew si no está (puede pedir la contraseña de la Mac).
 2. Instala `git` y la CLI de GitHub (`gh`) si no están, y pide iniciar sesión en GitHub (se abre el navegador).
 3. Clona o actualiza el repo privado `platform-workspace` en `business/platform/platform-workspace`.
-4. Corre su `setup-mac.sh`, que instala el resto de las herramientas, clona y verifica todos los repos, instala Claude y genera el workspace de VS Code. Al final muestra el resultado, por ejemplo **"29 de 29 repos bajados y verificados"**, y dice **Listo** o **INCOMPLETO** con lo que falta. Si queda incompleto, se vuelve a correr el mismo comando.
+4. Corre su `setup-mac.sh`, que instala el resto de las herramientas, clona y verifica todos los repos, instala Claude y genera el workspace de VS Code. Al final muestra el resultado, por ejemplo **"30 de 30 repos bajados y verificados"**, y dice **Listo** o **INCOMPLETO** con lo que falta. Si queda incompleto, se vuelve a correr el mismo comando.
 
 El detalle completo está en el README de `platform-workspace`.
 
