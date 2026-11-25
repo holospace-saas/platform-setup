@@ -22,7 +22,15 @@ say()  { printf '\n=== %s\n' "$1"; }
 fail() { printf '\nERROR: %s\n' "$1" >&2; exit 1; }
 
 # When run as `curl ... | bash`, stdin is the script itself: interactive steps must read the terminal.
-tty_in() { if (: </dev/tty) 2>/dev/null; then "$@" </dev/tty; else "$@"; fi; }
+# Use the terminal's real device (/dev/ttysNNN), not /dev/tty: Claude Code runs on Bun, which cannot
+# watch /dev/tty with kqueue on macOS and crashes ("EINVAL: invalid argument, kqueue").
+term_dev() {
+  local t; t="$(ps -o tty= -p $$ 2>/dev/null | tr -d ' ')"
+  case "$t" in ''|'?'|'??') ;; *) if (: <"/dev/$t") 2>/dev/null; then echo "/dev/$t"; return 0; fi ;; esac
+  if (: </dev/tty) 2>/dev/null; then echo /dev/tty; return 0; fi
+  return 1
+}
+tty_in() { local d; if d="$(term_dev)"; then "$@" <"$d"; else "$@"; fi; }
 
 load_brew() {
   local b
