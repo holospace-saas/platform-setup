@@ -22,7 +22,7 @@ say()  { printf '\n=== %s\n' "$1"; }
 fail() { printf '\nERROR: %s\n' "$1" >&2; exit 1; }
 
 # When run as `curl ... | bash`, stdin is the script itself: interactive steps must read the terminal.
-tty_in() { if [ -r /dev/tty ]; then "$@" </dev/tty; else "$@"; fi; }
+tty_in() { if (: </dev/tty) 2>/dev/null; then "$@" </dev/tty; else "$@"; fi; }
 
 load_brew() {
   local b
